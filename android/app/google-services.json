@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "693961352256",
+    "project_id": "owe-me-aeeb3",
+    "storage_bucket": "owe-me-aeeb3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:693961352256:android:383422a6d2dece2c2c2ba5",
+        "android_client_info": {
+          "package_name": "com.firebase.oweme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "693961352256-clradesve2c8gmou46rghfi31ceaiajo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.firebase.oweme",
+            "certificate_hash": "29cbf4daf633ffda04f38c468c53ae7988e891a6"
+          }
+        },
+        {
+          "client_id": "693961352256-ckgi2qekvg8tst45gsa9dtpkiuvcheks.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKHBwJGbcbLe2LLAyAsFhJqLLSazBTZ04"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "693961352256-ckgi2qekvg8tst45gsa9dtpkiuvcheks.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "693961352256-f20c7hdrpe38fkp6dkqku06tad6veq19.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.default.oweme"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
