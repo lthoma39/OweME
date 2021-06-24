@@ -14,12 +14,12 @@ class _RegistrationCardState extends State<RegistrationCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 200),
+      padding: const EdgeInsets.only(top: 225),
       child: Align(
         alignment: Alignment.topCenter,
         child: Container(
           padding: EdgeInsets.all(20),
-          height: SizeConfig.screenHeight / 2,
+          height: SizeConfig.screenHeight / 2.5,
           width: SizeConfig.screenWidth - 40,
           margin: EdgeInsets.symmetric(horizontal: 20),
           decoration: BoxDecoration(
@@ -96,9 +96,97 @@ class _RegistrationCardState extends State<RegistrationCard> {
                   ),
                 ],
               ),
+              Container(
+                margin: EdgeInsets.only(top: 20),
+                child: Column(
+                  children: [
+                    _OMTextField(
+                      iconData: Icons.person_outlined,
+                      isEmail: false,
+                      isPassword: false,
+                      hintText: 'Username',
+                    ),
+                    _OMTextField(
+                      iconData: Icons.email_outlined,
+                      isEmail: true,
+                      isPassword: false,
+                      hintText: 'Email',
+                    ),
+                    _OMTextField(
+                      iconData: Icons.lock_outlined,
+                      isEmail: false,
+                      isPassword: true,
+                      hintText: 'Password',
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                width: 250,
+                margin: EdgeInsets.only(top: 10),
+                child: RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    text: "By pressing 'Submit' you agree to our ",
+                    style: TextStyle(color: Palette.textColor2),
+                    children: [
+                      TextSpan(
+                        //TODO: Implement recognizer: ,
+                        text: 'terms & conditions',
+                        style: TextStyle(color: Colors.lightGreen),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _OMTextField extends StatelessWidget {
+  const _OMTextField({
+    Key? key,
+    this.iconData = Icons.help,
+    this.isEmail = false,
+    this.isPassword = false,
+    this.hintText = 'Default',
+  }) : super(key: key);
+
+  final IconData? iconData;
+  final bool isPassword;
+  final bool isEmail;
+  final String? hintText;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 15.0),
+      child: TextField(
+        obscureText: isPassword,
+        keyboardType: isEmail ? TextInputType.emailAddress : TextInputType.text,
+        decoration: InputDecoration(
+            prefixIcon: Icon(
+              iconData,
+              color: Palette.iconColor,
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Palette.textColor1),
+              borderRadius: BorderRadius.all(Radius.circular(35)),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Palette.textColor1),
+              borderRadius: BorderRadius.all(Radius.circular(35)),
+            ),
+            contentPadding: EdgeInsets.all(10),
+            hintText: hintText,
+            hintStyle: TextStyle(
+              fontSize: 14,
+              color: Palette.textColor1,
+            )),
       ),
     );
   }
