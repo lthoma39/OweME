@@ -62,10 +62,10 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                         const Text(
-                          'Sign up to continue',
+                          'Login or Sign up to continue',
                           style: TextStyle(
                             letterSpacing: 1,
-                            fontSize: 20,
+                            fontSize: 15,
                             color: Colors.white,
                           ),
                         ),
