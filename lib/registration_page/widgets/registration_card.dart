@@ -14,12 +14,13 @@ class _RegistrationCardState extends State<RegistrationCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 225),
+      //TODO: use 225 for padding if this doesnt work
+      padding: EdgeInsets.only(top: SizeConfig.screenHeight / 3.5),
       child: Align(
         alignment: Alignment.topCenter,
         child: Container(
           padding: EdgeInsets.all(20),
-          height: SizeConfig.screenHeight / 2.5,
+          height: SizeConfig.screenHeight / 2.25,
           width: SizeConfig.screenWidth - 40,
           margin: EdgeInsets.symmetric(horizontal: 20),
           decoration: BoxDecoration(
