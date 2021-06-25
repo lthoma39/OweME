@@ -10,11 +10,15 @@ class RegistrationScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Palette.backgroundColor,
-      body: Stack(
-        children: <Widget>[
-          TitleCard(),
-          RegistrationCard(),
-        ],
+      body: SingleChildScrollView(
+        child: Stack(
+          children: <Widget>[
+            TitleCard(),
+            SubmitButton(showShadow: true),
+            RegistrationCard(),
+            SubmitButton(),
+          ],
+        ),
       ),
     );
   }

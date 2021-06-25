@@ -19,7 +19,7 @@ class _RegistrationCardState extends State<RegistrationCard> {
         alignment: Alignment.topCenter,
         child: Container(
           padding: EdgeInsets.all(20),
-          height: SizeConfig.screenHeight / 2,
+          height: SizeConfig.screenHeight / 2.5,
           width: SizeConfig.screenWidth - 40,
           margin: EdgeInsets.symmetric(horizontal: 20),
           decoration: BoxDecoration(
@@ -33,115 +33,113 @@ class _RegistrationCardState extends State<RegistrationCard> {
               ),
             ],
           ),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          isSignUpScreen = false;
-                        });
-                      },
-                      child: Column(
-                        children: [
-                          Text(
-                            'LOGIN',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: !isSignUpScreen
-                                  ? Palette.activeColor
-                                  : Palette.textColor1,
-                            ),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isSignUpScreen = false;
+                      });
+                    },
+                    child: Column(
+                      children: [
+                        Text(
+                          'LOGIN',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: !isSignUpScreen
+                                ? Palette.activeColor
+                                : Palette.textColor1,
                           ),
-                          if (!isSignUpScreen)
-                            Container(
-                              margin: EdgeInsets.only(top: 5),
-                              height: 2,
-                              width: 55,
-                              color: Colors.greenAccent,
-                            ),
-                        ],
-                      ),
+                        ),
+                        if (!isSignUpScreen)
+                          Container(
+                            margin: EdgeInsets.only(top: 5),
+                            height: 2,
+                            width: 55,
+                            color: Colors.greenAccent,
+                          ),
+                      ],
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          isSignUpScreen = true;
-                        });
-                      },
-                      child: Column(
-                        children: [
-                          Text(
-                            'SIGNUP',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: isSignUpScreen
-                                  ? Palette.activeColor
-                                  : Palette.textColor1,
-                            ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isSignUpScreen = true;
+                      });
+                    },
+                    child: Column(
+                      children: [
+                        Text(
+                          'SIGNUP',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: isSignUpScreen
+                                ? Palette.activeColor
+                                : Palette.textColor1,
                           ),
-                          if (isSignUpScreen)
-                            Container(
-                              margin: EdgeInsets.only(top: 5),
-                              height: 2,
-                              width: 55,
-                              color: Colors.greenAccent,
-                            ),
-                        ],
-                      ),
+                        ),
+                        if (isSignUpScreen)
+                          Container(
+                            margin: EdgeInsets.only(top: 5),
+                            height: 2,
+                            width: 55,
+                            color: Colors.greenAccent,
+                          ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 20),
+                child: Column(
+                  children: [
+                    _OMTextField(
+                      iconData: Icons.person_outlined,
+                      isEmail: false,
+                      isPassword: false,
+                      hintText: 'Username',
+                    ),
+                    _OMTextField(
+                      iconData: Icons.email_outlined,
+                      isEmail: true,
+                      isPassword: false,
+                      hintText: 'Email',
+                    ),
+                    _OMTextField(
+                      iconData: Icons.lock_outlined,
+                      isEmail: false,
+                      isPassword: true,
+                      hintText: 'Password',
                     ),
                   ],
                 ),
-                Container(
-                  margin: EdgeInsets.only(top: 20),
-                  child: Column(
+              ),
+              Container(
+                width: 250,
+                margin: EdgeInsets.only(top: 10),
+                child: RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    text: "By pressing 'Submit' you agree to our ",
+                    style: TextStyle(color: Palette.textColor2),
                     children: [
-                      _OMTextField(
-                        iconData: Icons.person_outlined,
-                        isEmail: false,
-                        isPassword: false,
-                        hintText: 'Username',
-                      ),
-                      _OMTextField(
-                        iconData: Icons.email_outlined,
-                        isEmail: true,
-                        isPassword: false,
-                        hintText: 'Email',
-                      ),
-                      _OMTextField(
-                        iconData: Icons.lock_outlined,
-                        isEmail: false,
-                        isPassword: true,
-                        hintText: 'Password',
+                      TextSpan(
+                        //TODO: Implement recognizer: ,
+                        text: 'terms & conditions',
+                        style: TextStyle(color: Colors.lightGreen),
                       ),
                     ],
                   ),
                 ),
-                Container(
-                  width: 250,
-                  margin: EdgeInsets.only(top: 10),
-                  child: RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                      text: "By pressing 'Submit' you agree to our ",
-                      style: TextStyle(color: Palette.textColor2),
-                      children: [
-                        TextSpan(
-                          //TODO: Implement recognizer: ,
-                          text: 'terms & conditions',
-                          style: TextStyle(color: Colors.lightGreen),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
