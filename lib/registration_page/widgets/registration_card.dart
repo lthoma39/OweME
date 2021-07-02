@@ -14,7 +14,6 @@ class _RegistrationCardState extends State<RegistrationCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      //TODO: use 225 for padding if this doesnt work
       padding: EdgeInsets.only(top: SizeConfig.screenHeight / 3.5),
       child: Align(
         alignment: Alignment.topCenter,
@@ -124,7 +123,7 @@ class _RegistrationCardState extends State<RegistrationCard> {
               ),
               Container(
                 width: 250,
-                margin: EdgeInsets.only(top: 10),
+                margin: EdgeInsets.only(top: 20),
                 child: RichText(
                   textAlign: TextAlign.center,
                   text: TextSpan(
