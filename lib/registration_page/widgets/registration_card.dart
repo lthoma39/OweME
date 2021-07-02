@@ -9,7 +9,7 @@ class RegistrationCard extends StatefulWidget {
 
 class _RegistrationCardState extends State<RegistrationCard> {
   bool isSignUpScreen = true;
-  bool isRememberME = false;
+  bool isRememberMe = false;
 
   @override
   Widget build(BuildContext context) {
@@ -97,31 +97,62 @@ class _RegistrationCardState extends State<RegistrationCard> {
                     ),
                   ],
                 ),
-                Container(
-                  margin: EdgeInsets.only(top: 20),
-                  child: Column(
-                    children: [
-                      _OMTextField(
-                        iconData: Icons.person_outlined,
-                        isEmail: false,
-                        isPassword: false,
-                        hintText: 'Username',
-                      ),
-                      _OMTextField(
-                        iconData: Icons.email_outlined,
-                        isEmail: true,
-                        isPassword: false,
-                        hintText: 'Email',
-                      ),
-                      _OMTextField(
-                        iconData: Icons.lock_outlined,
-                        isEmail: false,
-                        isPassword: true,
-                        hintText: 'Password',
-                      ),
-                    ],
+                if (isSignUpScreen) _SignUp(),
+                if (!isSignUpScreen)
+                  Container(
+                    margin: EdgeInsets.only(top: 20),
+                    child: Column(
+                      children: [
+                        _OMTextField(
+                          iconData: Icons.email_outlined,
+                          isEmail: true,
+                          isPassword: false,
+                          hintText: 'Email',
+                        ),
+                        _OMTextField(
+                          iconData: Icons.lock_outlined,
+                          isEmail: false,
+                          isPassword: true,
+                          hintText: 'Password',
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Checkbox(
+                                  value: isRememberMe,
+                                  activeColor: Palette.textColor2,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      isRememberMe = !isRememberMe;
+                                    });
+                                  },
+                                ),
+                                Text(
+                                  'Remember me',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Palette.textColor1,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                'Forgot Password?',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.blue[200],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                ),
                 Container(
                   width: 250,
                   margin: EdgeInsets.only(top: 20),
@@ -144,6 +175,37 @@ class _RegistrationCardState extends State<RegistrationCard> {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _SignUp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(top: 20),
+      child: Column(
+        children: [
+          _OMTextField(
+            iconData: Icons.person_outlined,
+            isEmail: false,
+            isPassword: false,
+            hintText: 'Username',
+          ),
+          _OMTextField(
+            iconData: Icons.email_outlined,
+            isEmail: true,
+            isPassword: false,
+            hintText: 'Email',
+          ),
+          _OMTextField(
+            iconData: Icons.lock_outlined,
+            isEmail: false,
+            isPassword: true,
+            hintText: 'Password',
+          ),
+        ],
       ),
     );
   }
