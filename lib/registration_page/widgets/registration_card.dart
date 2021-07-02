@@ -155,7 +155,7 @@ class _RegistrationCardState extends State<RegistrationCard> {
                   ),
                 Container(
                   width: 250,
-                  margin: EdgeInsets.only(top: 20),
+                  margin: EdgeInsets.only(top: 15),
                   child: RichText(
                     textAlign: TextAlign.center,
                     text: TextSpan(
