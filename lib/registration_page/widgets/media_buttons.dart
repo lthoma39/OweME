@@ -10,7 +10,7 @@ class Media extends StatelessWidget {
         children: [
           Text('Or Signin With'),
           Container(
-            margin: EdgeInsets.only(left: 20, right: 20, top: 20),
+            margin: EdgeInsets.only(left: 10, right: 10, top: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
