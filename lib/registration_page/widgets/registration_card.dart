@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:owe_me/config/size_config.dart';
 import 'package:owe_me/registration_page/colors/colors.dart';
+import 'package:owe_me/registration_page/widgets/widgets.dart';
 
 class RegistrationCard extends StatefulWidget {
   @override
@@ -9,7 +10,6 @@ class RegistrationCard extends StatefulWidget {
 
 class _RegistrationCardState extends State<RegistrationCard> {
   bool isSignUpScreen = true;
-  bool isRememberMe = false;
 
   @override
   Widget build(BuildContext context) {
@@ -97,62 +97,8 @@ class _RegistrationCardState extends State<RegistrationCard> {
                     ),
                   ],
                 ),
-                if (isSignUpScreen) _SignUp(),
-                if (!isSignUpScreen)
-                  Container(
-                    margin: EdgeInsets.only(top: 20),
-                    child: Column(
-                      children: [
-                        _OMTextField(
-                          iconData: Icons.email_outlined,
-                          isEmail: true,
-                          isPassword: false,
-                          hintText: 'Email',
-                        ),
-                        _OMTextField(
-                          iconData: Icons.lock_outlined,
-                          isEmail: false,
-                          isPassword: true,
-                          hintText: 'Password',
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Checkbox(
-                                  value: isRememberMe,
-                                  activeColor: Palette.textColor2,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      isRememberMe = !isRememberMe;
-                                    });
-                                  },
-                                ),
-                                Text(
-                                  'Remember me',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Palette.textColor1,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                'Forgot Password?',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.blue[200],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+                if (isSignUpScreen) SignUp(),
+                if (!isSignUpScreen) LoginForm(),
                 Container(
                   width: 250,
                   margin: EdgeInsets.only(top: 15),
@@ -175,82 +121,6 @@ class _RegistrationCardState extends State<RegistrationCard> {
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _SignUp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: 20),
-      child: Column(
-        children: [
-          _OMTextField(
-            iconData: Icons.person_outlined,
-            isEmail: false,
-            isPassword: false,
-            hintText: 'Username',
-          ),
-          _OMTextField(
-            iconData: Icons.email_outlined,
-            isEmail: true,
-            isPassword: false,
-            hintText: 'Email',
-          ),
-          _OMTextField(
-            iconData: Icons.lock_outlined,
-            isEmail: false,
-            isPassword: true,
-            hintText: 'Password',
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _OMTextField extends StatelessWidget {
-  const _OMTextField({
-    Key? key,
-    this.iconData = Icons.help,
-    this.isEmail = false,
-    this.isPassword = false,
-    this.hintText = 'Default',
-  }) : super(key: key);
-
-  final IconData? iconData;
-  final bool isPassword;
-  final bool isEmail;
-  final String? hintText;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 15.0),
-      child: TextField(
-        obscureText: isPassword,
-        keyboardType: isEmail ? TextInputType.emailAddress : TextInputType.text,
-        decoration: InputDecoration(
-            prefixIcon: Icon(
-              iconData,
-              color: Palette.iconColor,
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Palette.textColor1),
-              borderRadius: BorderRadius.all(Radius.circular(35)),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Palette.textColor1),
-              borderRadius: BorderRadius.all(Radius.circular(35)),
-            ),
-            contentPadding: EdgeInsets.all(10),
-            hintText: hintText,
-            hintStyle: TextStyle(
-              fontSize: 14,
-              color: Palette.textColor1,
-            )),
       ),
     );
   }
