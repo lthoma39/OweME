@@ -8,18 +8,22 @@ class OMTextField extends StatelessWidget {
     this.isEmail = false,
     this.isPassword = false,
     this.hintText = 'Default',
+    this.textEditingController,
   }) : super(key: key);
 
   final IconData? iconData;
   final bool isPassword;
   final bool isEmail;
   final String? hintText;
+  final TextEditingController? textEditingController;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 15.0),
-      child: TextField(
+      child: TextFormField(
+        autovalidate: true,
+        controller: textEditingController,
         obscureText: isPassword,
         keyboardType: isEmail ? TextInputType.emailAddress : TextInputType.text,
         decoration: InputDecoration(

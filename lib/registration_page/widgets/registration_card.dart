@@ -101,7 +101,7 @@ class _RegistrationCardState extends State<RegistrationCard> {
                 if (!isSignUpScreen) LoginForm(),
                 Container(
                   width: 250,
-                  margin: EdgeInsets.only(top: 15),
+                  margin: EdgeInsets.only(top: 5),
                   child: RichText(
                     textAlign: TextAlign.center,
                     text: TextSpan(

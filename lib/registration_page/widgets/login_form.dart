@@ -14,6 +14,13 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   bool isRememberMe = false;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +33,14 @@ class _LoginFormState extends State<LoginForm> {
             isEmail: true,
             isPassword: false,
             hintText: 'Email',
+            textEditingController: _emailController,
           ),
           OMTextField(
             iconData: Icons.lock_outlined,
             isEmail: false,
             isPassword: true,
             hintText: 'Password',
+            textEditingController: _passwordController,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
