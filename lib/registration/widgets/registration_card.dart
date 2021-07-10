@@ -24,7 +24,7 @@ class _RegistrationCardState extends State<RegistrationCard> {
         alignment: Alignment.topCenter,
         child: Container(
           padding: EdgeInsets.all(20),
-          height: SizeConfig.screenHeight / 2.25,
+          height: SizeConfig.screenHeight / 2.2,
           width: SizeConfig.screenWidth - 40,
           margin: EdgeInsets.symmetric(horizontal: 20),
           decoration: BoxDecoration(
@@ -103,7 +103,8 @@ class _RegistrationCardState extends State<RegistrationCard> {
                   ],
                 ),
                 if (isSignUpScreen) SignUp(),
-                if (!isSignUpScreen) LoginForm(userRepository: widget.userRepository),
+                if (!isSignUpScreen)
+                  LoginForm(userRepository: widget.userRepository),
                 Container(
                   width: 250,
                   margin: EdgeInsets.only(top: 5),

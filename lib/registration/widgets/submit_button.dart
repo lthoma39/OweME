@@ -14,7 +14,7 @@ class SubmitButton extends StatelessWidget {
       alignment: Alignment.center,
       child: Padding(
         padding: EdgeInsets.only(
-          top: SizeConfig.screenHeight / 3.5 + SizeConfig.screenHeight / 2.6,
+          top: SizeConfig.screenHeight / 3.5 + SizeConfig.screenHeight / 2.48,
         ),
         child: Container(
           height: 90,
