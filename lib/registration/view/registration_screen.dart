@@ -14,7 +14,7 @@ class RegistrationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-
+    //TODO: Provide BlocProvider only to Reg Card
     return Scaffold(
       backgroundColor: Palette.backgroundColor,
       body: BlocProvider<LoginBloc>(
@@ -25,7 +25,6 @@ class RegistrationScreen extends StatelessWidget {
               Stack(
                 children: <Widget>[
                   TitleCard(),
-                  SubmitButton(showShadow: true),
                   RegistrationCard(userRepository: userRepository),
                 ],
               ),

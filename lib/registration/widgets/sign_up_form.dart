@@ -46,7 +46,6 @@ class _SignUpFormState extends State<SignUpForm> {
             hintText: 'Password',
             textEditingController: widget.passwordController,
           ),
-          TermsOfService(),
         ],
       ),
     );

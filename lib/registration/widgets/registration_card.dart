@@ -7,6 +7,7 @@ import 'package:owe_me/registration/colors/colors.dart';
 import 'package:owe_me/registration/repository/user_repository.dart';
 import 'package:owe_me/registration/widgets/widgets.dart';
 
+//TODO: Refactor some more. Specifically try to make a large code into sep priv widget
 class RegistrationCard extends StatefulWidget {
   RegistrationCard({required this.userRepository});
 
@@ -41,6 +42,7 @@ class _RegistrationCardState extends State<RegistrationCard> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
+        SubmitButton(showShadow: true),
         Padding(
           padding: EdgeInsets.only(top: SizeConfig.screenHeight / 3.5),
           child: Align(
@@ -127,18 +129,18 @@ class _RegistrationCardState extends State<RegistrationCard> {
                         ),
                       ],
                     ),
-                    if (isSignUpScreen)
-                      SignUpForm(
-                        nameController: signupNameController,
-                        emailController: signupEmailController,
-                        passwordController: signupPasswordController,
-                      ),
-                    if (!isSignUpScreen)
-                      LoginForm(
-                        userRepository: widget.userRepository,
-                        emailController: loginEmailController,
-                        passwordController: loginPasswordController,
-                      ),
+                    isSignUpScreen
+                        ? SignUpForm(
+                            nameController: signupNameController,
+                            emailController: signupEmailController,
+                            passwordController: signupPasswordController,
+                          )
+                        : LoginForm(
+                            userRepository: widget.userRepository,
+                            emailController: loginEmailController,
+                            passwordController: loginPasswordController,
+                          ),
+                    TermsOfService(),
                   ],
                 ),
               ),
@@ -181,7 +183,7 @@ class _RegistrationCardState extends State<RegistrationCard> {
     }
   }
 
-  //TODO apply proper bloc logic 
+  //TODO apply proper bloc logic
   void _onLoginSubmission() {
     print('login test');
   }
