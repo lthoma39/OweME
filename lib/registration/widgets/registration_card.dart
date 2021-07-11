@@ -38,6 +38,7 @@ class _RegistrationCardState extends State<RegistrationCard> {
     loginPasswordController.addListener(_onPasswordChanged);
   }
 
+  //TODO when both logins are invalid terms of conditions is cut off. Make empty container bigger?
   @override
   Widget build(BuildContext context) {
     return Stack(
