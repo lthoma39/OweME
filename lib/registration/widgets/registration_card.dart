@@ -34,6 +34,7 @@ class _RegistrationCardState extends State<RegistrationCard> {
   void initState() {
     super.initState();
     loginBloc = BlocProvider.of<LoginBloc>(context);
+    //TODO: Fix bug causing events to be called multiple times
     loginEmailController.addListener(_onEmailChanged);
     loginPasswordController.addListener(_onPasswordChanged);
   }
@@ -63,86 +64,84 @@ class _RegistrationCardState extends State<RegistrationCard> {
                   ),
                 ],
               ),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              isSignUpScreen = false;
-                              _clearControllers();
-                            });
-                          },
-                          child: Column(
-                            children: [
-                              Text(
-                                'LOGIN',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: !isSignUpScreen
-                                      ? Palette.activeColor
-                                      : Palette.textColor1,
-                                ),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            isSignUpScreen = false;
+                            _clearControllers();
+                          });
+                        },
+                        child: Column(
+                          children: [
+                            Text(
+                              'LOGIN',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: !isSignUpScreen
+                                    ? Palette.activeColor
+                                    : Palette.textColor1,
                               ),
-                              if (!isSignUpScreen)
-                                Container(
-                                  margin: EdgeInsets.only(top: 5),
-                                  height: 2,
-                                  width: 55,
-                                  color: Colors.greenAccent,
-                                ),
-                            ],
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              isSignUpScreen = true;
-                              _clearControllers();
-                            });
-                          },
-                          child: Column(
-                            children: [
-                              Text(
-                                'SIGNUP',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: isSignUpScreen
-                                      ? Palette.activeColor
-                                      : Palette.textColor1,
-                                ),
+                            ),
+                            if (!isSignUpScreen)
+                              Container(
+                                margin: EdgeInsets.only(top: 5),
+                                height: 2,
+                                width: 55,
+                                color: Colors.greenAccent,
                               ),
-                              if (isSignUpScreen)
-                                Container(
-                                  margin: EdgeInsets.only(top: 5),
-                                  height: 2,
-                                  width: 55,
-                                  color: Colors.greenAccent,
-                                ),
-                            ],
-                          ),
+                          ],
                         ),
-                      ],
-                    ),
-                    isSignUpScreen
-                        ? SignUpForm(
-                            nameController: signupNameController,
-                            emailController: signupEmailController,
-                            passwordController: signupPasswordController,
-                          )
-                        : LoginForm(
-                            userRepository: widget.userRepository,
-                            emailController: loginEmailController,
-                            passwordController: loginPasswordController,
-                          ),
-                    TermsOfService(),
-                  ],
-                ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            isSignUpScreen = true;
+                            _clearControllers();
+                          });
+                        },
+                        child: Column(
+                          children: [
+                            Text(
+                              'SIGNUP',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: isSignUpScreen
+                                    ? Palette.activeColor
+                                    : Palette.textColor1,
+                              ),
+                            ),
+                            if (isSignUpScreen)
+                              Container(
+                                margin: EdgeInsets.only(top: 5),
+                                height: 2,
+                                width: 55,
+                                color: Colors.greenAccent,
+                              ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  isSignUpScreen
+                      ? SignUpForm(
+                          nameController: signupNameController,
+                          emailController: signupEmailController,
+                          passwordController: signupPasswordController,
+                        )
+                      : LoginForm(
+                          userRepository: widget.userRepository,
+                          emailController: loginEmailController,
+                          passwordController: loginPasswordController,
+                        ),
+                  TermsOfService(),
+                ],
               ),
             ),
           ),
