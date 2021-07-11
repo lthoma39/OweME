@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:owe_me/registration/widgets/widgets.dart';
 
-class SignUp extends StatefulWidget {
+class SignUpForm extends StatefulWidget {
+  const SignUpForm({
+    Key? key,
+    required this.nameController,
+    required this.emailController,
+    required this.passwordController,
+  }) : super(key: key);
+
+  final TextEditingController nameController;
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+
   @override
-  _SignUpState createState() => _SignUpState();
+  _SignUpFormState createState() => _SignUpFormState();
 }
 
-class _SignUpState extends State<SignUp> {
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+class _SignUpFormState extends State<SignUpForm> {
 
   @override
   Widget build(BuildContext context) {
@@ -22,22 +30,23 @@ class _SignUpState extends State<SignUp> {
             isEmail: false,
             isPassword: false,
             hintText: 'Username',
-            textEditingController: _nameController,
+            textEditingController: widget.nameController,
           ),
           OMTextField(
             iconData: Icons.email_outlined,
             isEmail: true,
             isPassword: false,
             hintText: 'Email',
-            textEditingController: _emailController,
+            textEditingController: widget.emailController,
           ),
           OMTextField(
             iconData: Icons.lock_outlined,
             isEmail: false,
             isPassword: true,
             hintText: 'Password',
-            textEditingController: _passwordController,
+            textEditingController: widget.passwordController,
           ),
+          TermsOfService(),
         ],
       ),
     );

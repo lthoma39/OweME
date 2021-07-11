@@ -27,7 +27,6 @@ class RegistrationScreen extends StatelessWidget {
                   TitleCard(),
                   SubmitButton(showShadow: true),
                   RegistrationCard(userRepository: userRepository),
-                  SubmitButton(),
                 ],
               ),
               Media(),
