@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:owe_me/config/size_config.dart';
 import 'package:owe_me/registration/bloc/bloc.dart';
 import 'package:owe_me/registration/bloc/login/login_bloc.dart';
 import 'package:owe_me/registration/colors/colors.dart';
@@ -44,106 +43,85 @@ class _RegistrationCardState extends State<RegistrationCard> {
     return Stack(
       children: [
         SubmitButton(showShadow: true),
-        Padding(
-          padding: EdgeInsets.only(top: SizeConfig.screenHeight / 3.5),
-          child: Align(
-            alignment: Alignment.topCenter,
-            child: Container(
-              padding: EdgeInsets.all(20),
-              height: SizeConfig.screenHeight / 2.2,
-              width: SizeConfig.screenWidth - 40,
-              margin: EdgeInsets.symmetric(horizontal: 20),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(18),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(.3),
-                    blurRadius: 15,
-                    spreadRadius: 5,
-                  ),
-                ],
-              ),
-              child: Column(
+        EmptyRegistrationCardBackground(
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            isSignUpScreen = false;
-                            _clearControllers();
-                          });
-                        },
-                        child: Column(
-                          children: [
-                            Text(
-                              'LOGIN',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: !isSignUpScreen
-                                    ? Palette.activeColor
-                                    : Palette.textColor1,
-                              ),
-                            ),
-                            if (!isSignUpScreen)
-                              Container(
-                                margin: EdgeInsets.only(top: 5),
-                                height: 2,
-                                width: 55,
-                                color: Colors.greenAccent,
-                              ),
-                          ],
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isSignUpScreen = false;
+                        _clearControllers();
+                      });
+                    },
+                    child: Column(
+                      children: [
+                        Text(
+                          'LOGIN',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: !isSignUpScreen
+                                ? Palette.activeColor
+                                : Palette.textColor1,
+                          ),
                         ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            isSignUpScreen = true;
-                            _clearControllers();
-                          });
-                        },
-                        child: Column(
-                          children: [
-                            Text(
-                              'SIGNUP',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: isSignUpScreen
-                                    ? Palette.activeColor
-                                    : Palette.textColor1,
-                              ),
-                            ),
-                            if (isSignUpScreen)
-                              Container(
-                                margin: EdgeInsets.only(top: 5),
-                                height: 2,
-                                width: 55,
-                                color: Colors.greenAccent,
-                              ),
-                          ],
-                        ),
-                      ),
-                    ],
+                        if (!isSignUpScreen)
+                          Container(
+                            margin: EdgeInsets.only(top: 5),
+                            height: 2,
+                            width: 55,
+                            color: Colors.greenAccent,
+                          ),
+                      ],
+                    ),
                   ),
-                  isSignUpScreen
-                      ? SignUpForm(
-                          nameController: signupNameController,
-                          emailController: signupEmailController,
-                          passwordController: signupPasswordController,
-                        )
-                      : LoginForm(
-                          userRepository: widget.userRepository,
-                          emailController: loginEmailController,
-                          passwordController: loginPasswordController,
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isSignUpScreen = true;
+                        _clearControllers();
+                      });
+                    },
+                    child: Column(
+                      children: [
+                        Text(
+                          'SIGNUP',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: isSignUpScreen
+                                ? Palette.activeColor
+                                : Palette.textColor1,
+                          ),
                         ),
-                  TermsOfService(),
+                        if (isSignUpScreen)
+                          Container(
+                            margin: EdgeInsets.only(top: 5),
+                            height: 2,
+                            width: 55,
+                            color: Colors.greenAccent,
+                          ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
-            ),
+              isSignUpScreen
+                  ? SignUpForm(
+                      nameController: signupNameController,
+                      emailController: signupEmailController,
+                      passwordController: signupPasswordController,
+                    )
+                  : LoginForm(
+                      userRepository: widget.userRepository,
+                      emailController: loginEmailController,
+                      passwordController: loginPasswordController,
+                    ),
+              TermsOfService(),
+            ],
           ),
         ),
         SubmitButton(
