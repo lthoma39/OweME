@@ -6,6 +6,7 @@ import 'package:owe_me/registration/repository/user_repository.dart';
 import 'package:owe_me/registration/widgets/widgets.dart';
 
 // ignore: must_be_immutable
+//TODO: Refactor to be stateless see example A
 class LoginForm extends StatefulWidget {
   LoginForm({
     Key? key,
@@ -65,6 +66,7 @@ class _LoginFormState extends State<LoginForm> {
                       children: [
                         Row(
                           children: [
+                            //example A
                             Checkbox(
                               value: isRememberMe,
                               activeColor: Palette.textColor2,
