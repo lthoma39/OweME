@@ -29,8 +29,7 @@ class _LoginFormState extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
     //TODO: might not need the bloc listener HERE. Possibly use for snackbar stuff?
-    //TODO: turn this into BlocConsumer
-    return BlocListener<LoginBloc, LoginState>(
+    return BlocConsumer<LoginBloc, LoginState>(
       listener: (context, state) {
         if (state.isFailure!) {
           ScaffoldMessenger.of(context)
@@ -57,75 +56,73 @@ class _LoginFormState extends State<LoginForm> {
           print('success');
         }
       },
-      child: BlocBuilder<LoginBloc, LoginState>(
-        builder: (context, state) {
-          return Stack(
-            children: [
-              Container(
-                margin: EdgeInsets.only(top: 20),
-                child: Column(
-                  children: [
-                    OMTextField(
-                      iconData: Icons.email_outlined,
-                      isEmail: true,
-                      isPassword: false,
-                      hintText: 'Email',
-                      textEditingController: widget.emailController,
-                      validationError: 'Invalid Email',
-                      isValidated: !(state.isEmailValid!),
-                    ),
-                    OMTextField(
-                      iconData: Icons.lock_outlined,
-                      isEmail: false,
-                      isPassword: true,
-                      hintText: 'Password',
-                      textEditingController: widget.passwordController,
-                      validationError: 'Invalid Password',
-                      isValidated: !(state.isPasswordValid!),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            //example A
-                            Checkbox(
-                              value: isRememberMe,
-                              activeColor: Palette.textColor2,
-                              onChanged: (value) {
-                                setState(() {
-                                  isRememberMe = !isRememberMe;
-                                });
-                              },
-                            ),
-                            Text(
-                              'Remember me',
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Palette.textColor1,
-                              ),
-                            ),
-                          ],
-                        ),
-                        TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            'Forgot Password?',
+      builder: (context, state) {
+        return Stack(
+          children: [
+            Container(
+              margin: EdgeInsets.only(top: 20),
+              child: Column(
+                children: [
+                  OMTextField(
+                    iconData: Icons.email_outlined,
+                    isEmail: true,
+                    isPassword: false,
+                    hintText: 'Email',
+                    textEditingController: widget.emailController,
+                    validationError: 'Invalid Email',
+                    isValidated: !(state.isEmailValid!),
+                  ),
+                  OMTextField(
+                    iconData: Icons.lock_outlined,
+                    isEmail: false,
+                    isPassword: true,
+                    hintText: 'Password',
+                    textEditingController: widget.passwordController,
+                    validationError: 'Invalid Password',
+                    isValidated: !(state.isPasswordValid!),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          //example A
+                          Checkbox(
+                            value: isRememberMe,
+                            activeColor: Palette.textColor2,
+                            onChanged: (value) {
+                              setState(() {
+                                isRememberMe = !isRememberMe;
+                              });
+                            },
+                          ),
+                          Text(
+                            'Remember me',
                             style: TextStyle(
                               fontSize: 14,
-                              color: Colors.blue[200],
+                              color: Palette.textColor1,
                             ),
                           ),
+                        ],
+                      ),
+                      TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          'Forgot Password?',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.blue[200],
+                          ),
                         ),
-                      ],
-                    ),
-                  ],
-                ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-            ],
-          );
-        },
-      ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

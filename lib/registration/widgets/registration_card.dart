@@ -6,6 +6,7 @@ import 'package:owe_me/registration/colors/colors.dart';
 import 'package:owe_me/registration/repository/user_repository.dart';
 import 'package:owe_me/registration/widgets/widgets.dart';
 
+//TODO: When submitting disable all buttons
 //TODO: Refactor some more. Specifically try to make a large code into sep priv widget
 class RegistrationCard extends StatefulWidget {
   RegistrationCard({required this.userRepository});
