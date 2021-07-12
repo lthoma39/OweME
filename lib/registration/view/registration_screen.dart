@@ -14,23 +14,24 @@ class RegistrationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    //TODO: Provide BlocProvider only to Reg Card
+    
     return Scaffold(
       backgroundColor: Palette.backgroundColor,
-      body: BlocProvider<LoginBloc>(
-        create: (context) => LoginBloc(userRepository: userRepository),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Stack(
-                children: <Widget>[
-                  TitleCard(),
-                  RegistrationCard(userRepository: userRepository),
-                ],
-              ),
-              Media(),
-            ],
-          ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Stack(
+              children: <Widget>[
+                TitleCard(),
+                BlocProvider<LoginBloc>(
+                  create: (context) =>
+                      LoginBloc(userRepository: userRepository),
+                  child: RegistrationCard(userRepository: userRepository),
+                ),
+              ],
+            ),
+            Media(),
+          ],
         ),
       ),
     );

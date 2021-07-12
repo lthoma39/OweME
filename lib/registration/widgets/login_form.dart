@@ -28,12 +28,34 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
-    //TODO: might not need the bloc listener HERE
+    //TODO: might not need the bloc listener HERE. Possibly use for snackbar stuff?
+    //TODO: turn this into BlocConsumer
     return BlocListener<LoginBloc, LoginState>(
       listener: (context, state) {
-        if (state.isFailure!) {}
-        if (state.isSubmitting!) {}
-        if (state.isSuccess!) {}
+        if (state.isFailure!) {
+          ScaffoldMessenger.of(context)
+            ..removeCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(
+                content: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text('Login Failure'),
+                    Icon(
+                      Icons.error_outline,
+                      color: Colors.white,
+                    ),
+                  ],
+                ),
+              ),
+            );
+        }
+        if (state.isSubmitting!) {
+          print('Submitting');
+        }
+        if (state.isSuccess!) {
+          print('success');
+        }
       },
       child: BlocBuilder<LoginBloc, LoginState>(
         builder: (context, state) {

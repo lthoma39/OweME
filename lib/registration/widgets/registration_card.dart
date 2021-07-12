@@ -125,9 +125,22 @@ class _RegistrationCardState extends State<RegistrationCard> {
             ],
           ),
         ),
-        SubmitButton(
-          onPressed: isSignUpScreen ? _onSignUpSubmission : _onLoginSubmission,
-        ),
+        isSignUpScreen
+            ? SubmitButton(onPressed: _onSignUpSubmission)
+            : BlocBuilder<LoginBloc, LoginState>(
+                builder: (context, state) {
+                  if (state.isSubmitting! || state.isSuccess!) {
+                    return SubmitButton(
+                      showProgress: true,
+                      onPressed: _onLoginSubmission,
+                    );
+                  }
+
+                  return SubmitButton(
+                    onPressed: _onLoginSubmission,
+                  );
+                },
+              )
       ],
     );
   }
@@ -161,9 +174,13 @@ class _RegistrationCardState extends State<RegistrationCard> {
     }
   }
 
-  //TODO apply proper bloc logic
   void _onLoginSubmission() {
-    print('login test');
+    loginBloc.add(
+      LoginWithCredentialsPressed(
+        email: loginEmailController.text,
+        password: loginPasswordController.text,
+      ),
+    );
   }
 
   void _onSignUpSubmission() {

@@ -42,6 +42,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     required String password,
   }) async* {
     yield LoginState.loading();
+    //TODO: Remove delay, just using as test
+    await Future.delayed(Duration(seconds: 5));
     try {
       await userRepository.signInWithCredentials(email, password);
       yield LoginState.success();
