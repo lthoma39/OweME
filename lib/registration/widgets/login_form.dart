@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:owe_me/registration/bloc/authentication/authentication.dart';
 import 'package:owe_me/registration/bloc/login/login.dart';
 import 'package:owe_me/registration/colors/colors.dart';
 import 'package:owe_me/registration/repository/user_repository.dart';
@@ -55,6 +56,8 @@ class _LoginFormState extends State<LoginForm> {
         }
         if (state.isSuccess!) {
           print('Login Success');
+          BlocProvider.of<AuthenticationBloc>(context)
+              .add(AuthenticationLoggedIn());
         }
       },
       builder: (context, state) {

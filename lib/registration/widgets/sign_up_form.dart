@@ -51,6 +51,8 @@ class _SignUpFormState extends State<SignUpForm> {
         }
         if (state.isSuccess!) {
           print('Sign up Success');
+          BlocProvider.of<AuthenticationBloc>(context)
+              .add(AuthenticationLoggedIn());
         }
       },
       builder: (context, state) {
