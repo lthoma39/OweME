@@ -48,12 +48,13 @@ class _LoginFormState extends State<LoginForm> {
                 ),
               ),
             );
+          print('Login Failure');
         }
         if (state.isSubmitting!) {
-          print('Submitting');
+          print('Submitting Login');
         }
         if (state.isSuccess!) {
-          print('success');
+          print('Login Success');
         }
       },
       builder: (context, state) {

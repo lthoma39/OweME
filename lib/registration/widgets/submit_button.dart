@@ -42,7 +42,7 @@ class SubmitButton extends StatelessWidget {
               : showProgress
                   ? CircularProgressIndicator()
                   : GestureDetector(
-                      onTap: onPressed!,
+                      onTap: onPressed ?? null,
                       child: Container(
                         decoration: BoxDecoration(
                           gradient: LinearGradient(

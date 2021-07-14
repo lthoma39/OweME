@@ -22,21 +22,45 @@ class _RegistrationCardState extends State<RegistrationCard> {
   final TextEditingController loginEmailController = TextEditingController();
   final TextEditingController loginPasswordController = TextEditingController();
 
-  //TODO: Flesh out signUp controllers like login controllers
+  //TODO: Flesh out name controller
   final TextEditingController signupNameController = TextEditingController();
   final TextEditingController signupEmailController = TextEditingController();
   final TextEditingController signupPasswordController =
       TextEditingController();
 
   late LoginBloc loginBloc;
+  late SignUpBloc signUpBloc;
+
+  bool get isLoginPopulated =>
+      loginEmailController.text.isNotEmpty &&
+      loginPasswordController.text.isNotEmpty;
+
+  bool isLoginButtonEnabled(LoginState state) =>
+      state.isFormValid &&
+      isLoginPopulated &&
+      !state.isSubmitting! &&
+      !state.isSuccess!;
+
+  bool get isSignupPopulated =>
+      signupEmailController.text.isNotEmpty &&
+      signupPasswordController.text.isNotEmpty;
+
+  bool isSignupButtonEnabled(SignUpState state) =>
+      state.isFormValid &&
+      isSignupPopulated &&
+      !state.isSubmitting! &&
+      !state.isSuccess!;
 
   @override
   void initState() {
     super.initState();
     loginBloc = BlocProvider.of<LoginBloc>(context);
+    signUpBloc = BlocProvider.of<SignUpBloc>(context);
     //TODO: Fix bug causing events to be called multiple times
     loginEmailController.addListener(_onEmailChanged);
     loginPasswordController.addListener(_onPasswordChanged);
+    signupEmailController.addListener(_onSignUpEmailChanged);
+    signupPasswordController.addListener(_onSignUpPasswordChanged);
   }
 
   //TODO when both logins are invalid terms of conditions is cut off. Make empty container bigger?
@@ -46,99 +70,117 @@ class _RegistrationCardState extends State<RegistrationCard> {
       children: [
         SubmitButton(showShadow: true),
         EmptyRegistrationCardBackground(
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        isSignUpScreen = false;
-                        _clearControllers();
-                      });
-                    },
-                    child: Column(
-                      children: [
-                        Text(
-                          'LOGIN',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: !isSignUpScreen
-                                ? Palette.activeColor
-                                : Palette.textColor1,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isSignUpScreen = false;
+                          _clearControllers();
+                        });
+                      },
+                      child: Column(
+                        children: [
+                          Text(
+                            'LOGIN',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: !isSignUpScreen
+                                  ? Palette.activeColor
+                                  : Palette.textColor1,
+                            ),
                           ),
-                        ),
-                        if (!isSignUpScreen)
-                          Container(
-                            margin: EdgeInsets.only(top: 5),
-                            height: 2,
-                            width: 55,
-                            color: Colors.greenAccent,
-                          ),
-                      ],
+                          if (!isSignUpScreen)
+                            Container(
+                              margin: EdgeInsets.only(top: 5),
+                              height: 2,
+                              width: 55,
+                              color: Colors.greenAccent,
+                            ),
+                        ],
+                      ),
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        isSignUpScreen = true;
-                        _clearControllers();
-                      });
-                    },
-                    child: Column(
-                      children: [
-                        Text(
-                          'SIGNUP',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: isSignUpScreen
-                                ? Palette.activeColor
-                                : Palette.textColor1,
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isSignUpScreen = true;
+                          _clearControllers();
+                        });
+                      },
+                      child: Column(
+                        children: [
+                          Text(
+                            'SIGNUP',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: isSignUpScreen
+                                  ? Palette.activeColor
+                                  : Palette.textColor1,
+                            ),
                           ),
-                        ),
-                        if (isSignUpScreen)
-                          Container(
-                            margin: EdgeInsets.only(top: 5),
-                            height: 2,
-                            width: 55,
-                            color: Colors.greenAccent,
-                          ),
-                      ],
+                          if (isSignUpScreen)
+                            Container(
+                              margin: EdgeInsets.only(top: 5),
+                              height: 2,
+                              width: 55,
+                              color: Colors.greenAccent,
+                            ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              isSignUpScreen
-                  ? SignUpForm(
-                      nameController: signupNameController,
-                      emailController: signupEmailController,
-                      passwordController: signupPasswordController,
-                    )
-                  : LoginForm(
-                      userRepository: widget.userRepository,
-                      emailController: loginEmailController,
-                      passwordController: loginPasswordController,
-                    ),
-              TermsOfService(),
-            ],
+                  ],
+                ),
+                isSignUpScreen
+                    ? SignUpForm(
+                        userRepository: widget.userRepository,
+                        nameController: signupNameController,
+                        emailController: signupEmailController,
+                        passwordController: signupPasswordController,
+                      )
+                    : LoginForm(
+                        userRepository: widget.userRepository,
+                        emailController: loginEmailController,
+                        passwordController: loginPasswordController,
+                      ),
+                TermsOfService(),
+              ],
+            ),
           ),
         ),
         isSignUpScreen
-            ? SubmitButton(onPressed: _onSignUpSubmission)
+            ? BlocBuilder<SignUpBloc, SignUpState>(
+                builder: (context, state) {
+                  if (state.isSubmitting! || state.isSuccess!) {
+                    return SubmitButton(
+                      showProgress: true,
+                      onPressed: null,
+                    );
+                  }
+                  return SubmitButton(
+                    onPressed: isSignupButtonEnabled(state)
+                        ? _onSignUpSubmission
+                        : null,
+                  );
+                },
+              )
             : BlocBuilder<LoginBloc, LoginState>(
                 builder: (context, state) {
                   if (state.isSubmitting! || state.isSuccess!) {
                     return SubmitButton(
                       showProgress: true,
-                      onPressed: _onLoginSubmission,
+                      onPressed: null,
                     );
                   }
 
                   return SubmitButton(
-                    onPressed: _onLoginSubmission,
+                    onPressed:
+                        isLoginButtonEnabled(state) ? _onLoginSubmission : null,
                   );
                 },
               )
@@ -164,6 +206,15 @@ class _RegistrationCardState extends State<RegistrationCard> {
     loginBloc.add(LoginPasswordChanged(password: loginPasswordController.text));
   }
 
+  void _onSignUpEmailChanged() {
+    signUpBloc.add(SignUpEmailChanged(email: signupEmailController.text));
+  }
+
+  void _onSignUpPasswordChanged() {
+    signUpBloc
+        .add(SignUpPasswordChanged(password: signupPasswordController.text));
+  }
+
   void _clearControllers() {
     if (isSignUpScreen) {
       loginEmailController.clear();
@@ -185,6 +236,9 @@ class _RegistrationCardState extends State<RegistrationCard> {
   }
 
   void _onSignUpSubmission() {
-    print('signup test');
+    signUpBloc.add(SignUpWithCredentialsPressed(
+      email: signupEmailController.text,
+      password: signupPasswordController.text,
+    ));
   }
 }

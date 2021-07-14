@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:owe_me/config/config.dart';
+import 'package:owe_me/registration/bloc/bloc.dart';
 import 'package:owe_me/registration/bloc/login/login.dart';
 import 'package:owe_me/registration/colors/colors.dart';
 import 'package:owe_me/registration/repository/user_repository.dart';
@@ -14,7 +15,7 @@ class RegistrationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    
+
     return Scaffold(
       backgroundColor: Palette.backgroundColor,
       body: SingleChildScrollView(
@@ -23,9 +24,17 @@ class RegistrationScreen extends StatelessWidget {
             Stack(
               children: <Widget>[
                 TitleCard(),
-                BlocProvider<LoginBloc>(
-                  create: (context) =>
-                      LoginBloc(userRepository: userRepository),
+                MultiBlocProvider(
+                  providers: [
+                    BlocProvider<LoginBloc>(
+                      create: (context) =>
+                          LoginBloc(userRepository: userRepository),
+                    ),
+                    BlocProvider<SignUpBloc>(
+                      create: (context) =>
+                          SignUpBloc(userRepository: userRepository),
+                    ),
+                  ],
                   child: RegistrationCard(userRepository: userRepository),
                 ),
               ],
