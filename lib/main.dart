@@ -7,8 +7,6 @@ import 'package:owe_me/registration/bloc/bloc_observer.dart';
 import 'package:owe_me/registration/repository/repository.dart';
 import 'registration/view/view.dart';
 
-//TODO: Refactor code to remove some userRepository dependency injection
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();

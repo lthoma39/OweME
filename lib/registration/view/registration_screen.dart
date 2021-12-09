@@ -35,7 +35,7 @@ class RegistrationScreen extends StatelessWidget {
                           SignUpBloc(userRepository: userRepository),
                     ),
                   ],
-                  child: RegistrationCard(userRepository: userRepository),
+                  child: RegistrationCard(),
                 ),
               ],
             ),

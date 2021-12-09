@@ -3,16 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:owe_me/registration/bloc/bloc.dart';
 import 'package:owe_me/registration/bloc/login/login_bloc.dart';
 import 'package:owe_me/registration/colors/colors.dart';
-import 'package:owe_me/registration/repository/user_repository.dart';
 import 'package:owe_me/registration/widgets/widgets.dart';
 
 //TODO: When submitting disable all buttons
 //TODO: Refactor some more. Specifically try to make a large code into sep priv widget
 class RegistrationCard extends StatefulWidget {
-  RegistrationCard({required this.userRepository});
-
-  final UserRepository userRepository;
-
   @override
   _RegistrationCardState createState() => _RegistrationCardState();
 }
@@ -138,13 +133,13 @@ class _RegistrationCardState extends State<RegistrationCard> {
                 ),
                 isSignUpScreen
                     ? SignUpForm(
-                        userRepository: widget.userRepository,
+                        userRepository: signUpBloc.userRepository,
                         nameController: signupNameController,
                         emailController: signupEmailController,
                         passwordController: signupPasswordController,
                       )
                     : LoginForm(
-                        userRepository: widget.userRepository,
+                        userRepository: loginBloc.userRepository,
                         emailController: loginEmailController,
                         passwordController: loginPasswordController,
                       ),

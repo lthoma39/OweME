@@ -29,7 +29,6 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
-    //TODO: might not need the bloc listener HERE. Possibly use for snackbar stuff?
     return BlocConsumer<LoginBloc, LoginState>(
       listener: (context, state) {
         if (state.isFailure!) {
